@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 }
 ```
 - @EnableWebSecurity : Spring Security 설정들을 활성화시켜줌
-- .authorizeRequests() : URL별 권환 관리를 설정하는 옵션의 시작점
+- .authorizeRequests() : URL별 권한 관리를 설정하는 옵션의 시작점
 - .antMatchers() : 권한 관리 대상을 지정하는 옵션으로 URL, HTTP 메소드별로 관리가 가능함
 - .permitAll() : 지정된 URL들에게 전체 열람 권한을 주는 옵션
 - .anyRequest() : 설정된 값들 이외의 나머지 URL
