@@ -78,7 +78,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         httpSession.setAttribute("user", new SessionUser(user));
 
         return new DefaultOAuth2User(
-                Collections.singleton(new SimpleGrantedAuthority(user.getRoleKey())),
+                Collections.singleton(new SimpleGrantedAuthority("USER")),
                 attributes.getAttributes(),
                 attributes.getNameAttributeKey());
     }
@@ -93,7 +93,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     }
 }
 ```
-- userNameAttributeName : OAuth2 로그인 진행시 키가되는 필드값, 구글은 기본적으로 코드(sub)를 지원, 네이버와 카카오는 지원하지 않음
+- userNameAttributeName : OAuth2 로그인 진행시 키가되는 필드값, 구글은 기본적으로 코드(sub)를 지원
 - OAuthAttributes : OAuth2UserService를 통해 가져온 OAuth2User의 attribute를 담을 클래스
 - SessionUser : 세션에 사용자 정보를 저장하기 위한 Dto 클래스
 - 구글 사용자 정보가 업데이트 되었을 때를 대비하여 saveOrUpdate 기능 구현
@@ -105,28 +105,31 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 public class OAuthAttributes {
     private Map<String, Object> attributes;
     private String nameAttributeKey;
+    private String sub;
     private String name;
     private String email;
-    private String picture;
+    private String imgUrl;
 
     @Builder
-    public OAuthAttributes(Map<String, Object> attributes, String nameAttributeKey, String name, String email, String picture) {
+    public OAuthAttributes(Map<String, Object> attributes, String nameAttributeKey, String sub, String name, String email, String imgUrl) {
         this.attributes = attributes;
         this.nameAttributeKey = nameAttributeKey;
+        this.sub = sub;
         this.name = name;
         this.email = email;
-        this.picture = picture;
+        this.imgUrl = imgUrl;
     }
 
-    public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes) {
-           return ofGoogle(userNameAttributeName, attributes);
+    public static OAuthAttributes of(String userNameAttributeName, Map<String, Object> attributes) {
+        return ofGoogle(userNameAttributeName, attributes);
     }
 
     private static OAuthAttributes ofGoogle(String userNameAttributeName, Map<String, Object> attributes) {
         return OAuthAttributes.builder()
+                .sub((String) attributes.get("sub"))
                 .name((String) attributes.get("name"))
                 .email((String) attributes.get("email"))
-                .picture((String) attributes.get("picture"))
+                .imgUrl((String) attributes.get("picture"))
                 .attributes(attributes)
                 .nameAttributeKey(userNameAttributeName)
                 .build();
@@ -134,9 +137,10 @@ public class OAuthAttributes {
 
     public User toEntity() {
         return User.builder()
+                .id(sub)
                 .name(name)
                 .email(email)
-                .picture(picture)
+                .imgUrl(imgUrl)
                 .build();
     }
 }
