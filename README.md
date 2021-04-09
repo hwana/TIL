@@ -2,7 +2,7 @@
 📝Today I Learned | 오늘의 삽질기록
 
 
-### ⚠에러(경고) 모음집
+### 에러(경고) 모음집⚠
 - mysql
 1. [Loading 'class com.mysql.jdbc.Driver'. This is deprecated. The new driver class is 'com.mysql.cj.jdbc.Driver'](WasteofTimeShoveling/20210408.md)
 
