@@ -7,7 +7,7 @@ spring.security.oauth2.client.registration.google.client-id=구글클라이언�
 spring.security.oauth2.client.registration.google.client-secret=구글클라이언트시크릿
 spring.security.oauth2.client.registration.google.scope=profile,email
 ```
-- scope를 별도로 등록하지 않으면 기본값은 openid, profile, emial이다.
+- scope를 별도로 등록하지 않으면 기본값은 openid, profile, email이다.
 - 여기서 profile, email을 scope로 강제로 등록한 이유는 openid라는 scope가 있으면 Open Id Provider로 인식하기 때문이다.
 - 이렇게 되면 OpenId Provider인 서비스(구글)와 그렇지 않은 서비스(네이버 등)로 나눠서 각각 OAuth2Service를 만들어야 한다.
 - 하나의 OAuth2Service로 사용하기 위해 일부러 openid scope를 빼고 등록한다.
