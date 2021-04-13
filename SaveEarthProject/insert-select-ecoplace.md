@@ -120,7 +120,7 @@ public class PlaceController {
 }
 ```
 - 페이징 기본 정렬은 이름순으로, 한 페이지당 불러올 게시물 수는 12개로 설정하였다.
-> `@PageableDefault` 어노테이션 제공
+> #### `@PageableDefault` 어노테이션 제공<br>
 > ![image](https://user-images.githubusercontent.com/37647995/114501014-1cdf7000-9c64-11eb-9c3b-b2d742f88a33.png)
 
 ### REST API TEST
