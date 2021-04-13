@@ -1,4 +1,4 @@
-# 에코 플레이스 등록, 조회하기
+# 에코 플레이스 등록, 조회하기()
 
 ## DTO를 사용한 이유
 - Entity 클래스는 DB와 맞닿아 있는 핵심 클래스로서 단순 데이터를 주고 받기 위해서 사용하면 안된다.
@@ -61,10 +61,14 @@ public class PlaceResponseDto {
 ### PlaceRepository.java
 ```java
 public interface PlaceRepository extends JpaRepository<Place, Long> {
-    public List<Place> findAll();
+    public Page<Place> findAll(Pageable pageable);
 }
 ```
 - Spring Data JPA에서 제공하는 JpaRepository를 구현하였다.
+
+> #### PlaceRepository에서 `Page<Place> findAll()` 메소드를 사용할 수 있는 이유<br>
+> JpaRepository는 PagingAndSortingRepository를 상속받기 때문에 기본적인 페이징 기능을 구현할 수 있다.
+> ![image](https://user-images.githubusercontent.com/37647995/114500586-48ae2600-9c63-11eb-9b5e-9e921c7e8225.png)
 
 ### PlaceService.java
 ```java
@@ -87,8 +91,8 @@ public class PlaceService {
         }
     }
 
-    public List<PlaceResponseDto> findAllPlace(){
-        return placeRepository.findAll().stream().map(PlaceResponseDto::new).collect(Collectors.toList());
+     public List<PlaceResponseDto> findAllPlace(Pageable pageable){
+        return placeRepository.findAll(pageable).stream().map(PlaceResponseDto::new).collect(Collectors.toList());
     }
 }
 ```
@@ -110,11 +114,14 @@ public class PlaceController {
     }
 
     @GetMapping("/api/place")
-    public List<PlaceResponseDto> placeList(){
-        return placeService.findAllPlace();
+    public List<PlaceResponseDto> placeList(@PageableDefault(sort = { "name" }, direction = Sort.Direction.ASC, size = 12) Pageable pageable){
+        return placeService.findAllPlace(pageable);
     }
 }
 ```
+- 페이징 기본 정렬은 이름순으로, 한 페이지당 불러올 게시물 수는 12개로 설정하였다.
+> `@PageableDefault` 어노테이션 제공
+> ![image](https://user-images.githubusercontent.com/37647995/114501014-1cdf7000-9c64-11eb-9c3b-b2d742f88a33.png)
 
 ### REST API TEST
 #### 에코 플레이스 등록하기
