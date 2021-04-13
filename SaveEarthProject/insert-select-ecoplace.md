@@ -1,42 +1,62 @@
 # 에코 플레이스 등록, 조회하기
 
-### PlaceSaveDto.java
+## DTO를 사용한 이유
+- Entity 클래스는 DB와 맞닿아 있는 핵심 클래스로서 단순 데이터를 주고 받기 위해서 사용하면 안된다.
+- 실제로 한 엔티티를 위한 API가 다양하게 만들어지는데, 한 엔티티가 각각의 API를 위한 모든 요구사항을 담기는 어렵다.
+- 엔티티를 변경하게 되면 API 스펙이 변하게 된다.<br>
+‼ **결론 : 엔티티 대신 API 스펙에 맞는 별도의 DTO를 노출해야 한다.**
+
+### PlaceSaveRequestDto.java
 ```java
 @Getter
 @NoArgsConstructor
 public class PlaceSaveRequestDto {
-
     private String name;
-
     private String address;
-
     private String imgUrl;
-
     private String category;
-
     private String contents;
-
     private int allMenuVegan;
-
-    @Builder
-    public PlaceSaveDto(String name, String address, String imgUrl, String category, String contents, int allMenuVegan) {
-        this.name = name;
-        this.address = address;
-        this.imgUrl = imgUrl;
-        this.category = category;
-        this.contents = contents;
-        this.allMenuVegan = allMenuVegan;
-    }
 
     public Place toEntity(){
         return Place.builder()
-          .name(name).address(address).imgUrl(imgUrl).category(category).contents(contents).allMenuVegan(allMenuVegan).build();
+                .name(name)
+                .address(address)
+                .imgUrl(imgUrl)
+                .category(category)
+                .contents(contents)
+                .allMenuVegan(allMenuVegan)
+                .build();
     }
-
 }
 ```
-- Entity 클래스는 DB와 맞닿아 있는 핵심 클래스로서 데이터를 주고 받기 위해서 사용하면 안된다.
+- 에코 플레이스 저장을 위한 DTO
 - toEntity 메소드를 작성하여 DTO에서 Entity로 변환이 가능하게 했다.
+
+### PlaceResponseDto.java
+```java
+@Getter
+@NoArgsConstructor
+public class PlaceResponseDto {
+    private String name;
+    private String address;
+    private String imgUrl;
+    private String category;
+    private String contents;
+    private int allMenuVegan;
+
+    public PlaceResponseDto(Place place) {
+        this.name = place.getName();
+        this.address = place.getAddress();
+        this.imgUrl = place.getImgUrl();
+        this.category = place.getCategory();
+        this.contents = place.getContents();
+        this.allMenuVegan = place.getAllMenuVegan();
+    }
+}
+```
+- 에코 플레이스 조회 응답을 위한 DTO
+- Place Entity를 매개변수로 받은 생성자로 각 필드를 초기화 시켜주었다.(Entity ➡ DTO 변환)
 
 ### PlaceRepository.java
 ```java
@@ -67,13 +87,14 @@ public class PlaceService {
         }
     }
 
-    public List<Place> findAllPlace(){
-        return placeRepository.findAll();
+    public List<PlaceResponseDto> findAllPlace(){
+        return placeRepository.findAll().stream().map(PlaceResponseDto::new).collect(Collectors.toList());
     }
 }
 ```
 - @RequiredArgsConstructor 어노테이션을 사용하여 초기화 되지 않은 final 필드의 의존성을 주입하였다.
 - 현재는 로컬 서버에 이미지가 업로드 되도록 구현하였다.
+- Repository에서 반환된 Place(entity)를 스트림을 활용해 PlaceResponseDto로 변환해서 리스트로 반환하였다.
 
 ### PlaceController.java
 ```java
@@ -89,7 +110,7 @@ public class PlaceController {
     }
 
     @GetMapping("/api/place")
-    public List<Place> placeList(){
+    public List<PlaceResponseDto> placeList(){
         return placeService.findAllPlace();
     }
 }
