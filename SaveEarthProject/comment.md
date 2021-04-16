@@ -97,6 +97,7 @@ public class CommentService {
 > 3. 댓글 내용
 > 4. 댓글 작성 시간
 > 이다.<br>
+>
 > 에코 플레이스의 아이디를 받아서 사용자에 대한 정보도 조회해야 하기 때문에 Comment 엔티티를 기준으로 Place, User 두 엔티티를 조인해줬다.<br> 
 
 ### build.gradle
