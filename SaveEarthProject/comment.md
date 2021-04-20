@@ -236,4 +236,52 @@ public class CommentController {
     }
 }
 ```
-### 댓글 
+## 댓글 등록
+### CommentSaveRequestDto.java
+```java
+@Getter
+@NoArgsConstructor
+public class CommentSaveRequestDto {
+
+    private String contents;
+    private Long placeId;
+    private String userId;
+
+}
+```
+### CommentService.java
+```java
+@Service
+@RequiredArgsConstructor
+@Transactional
+public class CommentService {
+
+    private final CommentRepository commentRepository;
+    private final PlaceRepository placeRepository;
+    private final UserRepository userRepository;
+
+    public void saveComment(CommentSaveRequestDto commentSaveRequestDto) {
+
+        Place place = placeRepository.getOne(commentSaveRequestDto.getPlaceId());
+        User user = userRepository.getOne(commentSaveRequestDto.getUserId());
+        String contents = commentSaveRequestDto.getContents();
+
+        commentRepository.save(Comment.builder().placeComment(place).userComment(user).contents(contents).build());
+    }
+}
+```
+### CommentController.java
+```java
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/api")
+public class CommentController {
+
+    private final CommentService commentService;
+
+    @PostMapping("/comment")
+    public void saveComment(@RequestBody CommentSaveRequestDto commentSaveRequestDto){
+        commentService.saveComment(commentSaveRequestDto);
+    }
+}
+```
