@@ -98,7 +98,7 @@ public class CommentService {
 > 4. 댓글 작성 시간
 > 이다.<br>
 >
-> 에코 플레이스의 아이디를 받아서 사용자에 대한 정보도 조회해야 하기 때문에 Comment 엔티티를 기준으로 Place, User 두 엔티티를 조인해줬다.<br> 
+> 에코 플레이스의 아이디를 받아서 사용자에 대한 정보도 조회해야 하기 때문에 Comment 엔티티를 기준으로 User 엔티티를 조인해줬다.<br> 
 
 ### build.gradle
 ```java
@@ -190,18 +190,17 @@ public class CommentRepositoryCustom {
         QComment qComment = QComment.comment;
         QUser qUser = QUser.user;
 
-        return jpaQueryFactory.selectDistinct(qComment)
-                .from(qComment).where(qPlace.id.eq(placeId))
-                .innerJoin(qComment.placeComment, qPlace)
-                .innerJoin(qComment.userComment, qUser)
-                .fetch();
+        return jpaQueryFactory.select(qComment)
+            .from(qComment)
+            .innerJoin(qComment.userComment, qUser)
+            .fetchJoin()
+            .where(qComment.placeComment.id.eq(placeId))
+            .fetch();
     }
 }
 ```
 - querydsl을 사용하기 위해서 별도의 custom repository를 생성했다. 
 - 컬렉션을 조인하면 발생하는 N+1문제를 해결하기 위해서 fetch join을 사용했다.
-- N+1 문제를 해결하여도 댓글 수만큼 동일한 엔티티가 조회되었기 때문에 distinct를 사용해서 해결했다.
-- 데이터베이스의 distinct는 데이터가 완벽하게 같지 않으면 중복제거가 되지 않지만, JPA에서 제공하는 distinct는 엔티티의 아이디 값이 같다면 중복을 제거해준다.
 > 처음 querydsl을 작성할 때는 place에 댓글 리스트만 가져오면 된다고 생각해서 place 엔티티 기준으로 데이터를 조회했었다. 그랬더니 사용자 정보를 가져올 수가 없어서 다시 comment 엔티티
 > 기준으로 작성했더니 placeId로 댓글리스트와 유저정보 모두 다 가져올 수 있었다.
 
