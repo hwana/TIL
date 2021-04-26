@@ -3,13 +3,11 @@
 
 
 ### 에러(경고) 모음집⚠
-- mysql<br>
-[1. Loading 'class com.mysql.jdbc.Driver'. This is deprecated. The new driver class is 'com.mysql.cj.jdbc.Driver'](WasteofTimeShoveling/20210408.md)
-- JPA<br>
-[1. findById()의 반환값](https://github.com/hwana/TIL/blob/main/WasteofTimeShoveling/20210413.md)<br>
-[2. ids for this class must be manually assigned before calling save()](https://github.com/hwana/TIL/blob/main/WasteofTimeShoveling/20210415.md)
-
-
+#### mysql<br>
+- [Loading 'class com.mysql.jdbc.Driver'. This is deprecated. The new driver class is 'com.mysql.cj.jdbc.Driver'](WasteofTimeShoveling/20210408.md)
+#### JPA<br>
+- [findById()의 반환값](https://github.com/hwana/TIL/blob/main/WasteofTimeShoveling/20210413.md)<br>
+- [ids for this class must be manually assigned before calling save()](https://github.com/hwana/TIL/blob/main/WasteofTimeShoveling/20210415.md)
 
 ### SaveEarth 개발일지👩‍💻
 [1. Spring Boot 프로젝트 생성하기](https://github.com/hwana/TIL/blob/main/SaveEarthProject/20210408.md)<br>
@@ -22,5 +20,9 @@
 [8. 댓글 삭제, 수정, 조회, 등록](https://github.com/hwana/TIL/blob/main/SaveEarthProject/comment.md)<br>
 [9. 좋아요 등록, 좋아요 취소](https://github.com/hwana/TIL/blob/main/SaveEarthProject/like.md)<br>
 [10. 마이페이지(내가 작성한 댓글 리스트, 내가 찜한 장소 리스트)](https://github.com/hwana/TIL/blob/main/SaveEarthProject/select-user.md)<br>
+
+### JAVA
+- [람다](https://github.com/hwana/TIL/blob/main/JAVA/lambda-expression.md)<br>
+- [스트림](https://github.com/hwana/TIL/blob/main/JAVA/stream.md)
 
 
