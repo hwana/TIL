@@ -21,7 +21,7 @@
 [9. 좋아요 등록, 좋아요 취소](https://github.com/hwana/TIL/blob/main/SaveEarthProject/like.md)<br>
 [10. 마이페이지(내가 작성한 댓글 리스트, 내가 찜한 장소 리스트)](https://github.com/hwana/TIL/blob/main/SaveEarthProject/select-user.md)<br>
 
-### JAVA
+### JAVA☕
 - [람다](https://github.com/hwana/TIL/blob/main/JAVA/lambda-expression.md)<br>
 - [스트림](https://github.com/hwana/TIL/blob/main/JAVA/stream.md)
 
