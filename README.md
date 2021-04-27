@@ -22,6 +22,7 @@
 [9. 좋아요 등록, 좋아요 취소](https://github.com/hwana/TIL/blob/main/SaveEarthProject/like.md)<br>
 [10. 마이페이지(내가 작성한 댓글 리스트, 내가 찜한 장소 리스트)](https://github.com/hwana/TIL/blob/main/SaveEarthProject/mypage.md)<br>
 [11. AWS S3에 파일 업로드 하기](https://github.com/hwana/TIL/blob/main/SaveEarthProject/AWS-S3-file-upload.md)<br>
+[12. 유저 정보 데이터베이서에서 조회하기](https://github.com/hwana/TIL/blob/main/SaveEarthProject/select-user.md)<br>
 <hr>
 
 ### JAVA☕
