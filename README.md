@@ -2,7 +2,7 @@
 
 
 
-### 에러(경고) 모음집⚠
+### ⚠ 에러(경고) 모음집 
 #### mysql<br>
 - [Loading 'class com.mysql.jdbc.Driver'. This is deprecated. The new driver class is 'com.mysql.cj.jdbc.Driver'](WasteofTimeShoveling/20210408.md)
 #### JPA<br>
@@ -10,7 +10,7 @@
 - [ids for this class must be manually assigned before calling save()](https://github.com/hwana/TIL/blob/main/WasteofTimeShoveling/20210415.md)
 <hr>
 
-### SaveEarth 개발일지👩‍💻
+### 👩‍💻 SaveEarth 개발일지 
 [1. Spring Boot 프로젝트 생성하기](https://github.com/hwana/TIL/blob/main/SaveEarthProject/20210408.md)<br>
 [2. 엔티티 생성하기](https://github.com/hwana/TIL/blob/main/SaveEarthProject/create-entity.md)<br>
 [3. oAuth2.0으로 google 로그인 구현하기](https://github.com/hwana/TIL/blob/main/SaveEarthProject/google-oauth.md)<br>
@@ -25,8 +25,10 @@
 [12. 유저 정보 데이터베이서에서 조회하기](https://github.com/hwana/TIL/blob/main/SaveEarthProject/select-user.md)<br>
 <hr>
 
-### JAVA☕
+### ☕ JAVA 
 - [람다](https://github.com/hwana/TIL/blob/main/JAVA/lambda-expression.md)<br>
 - [스트림](https://github.com/hwana/TIL/blob/main/JAVA/stream.md)
 
+### 📚 개발 도서 읽기 
+- [모던 자바 인 액션](https://github.com/hwana/TIL/tree/main/book/modernJavaInAction)
 
